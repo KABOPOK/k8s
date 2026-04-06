@@ -1,17 +1,17 @@
 # Kubernetes: Backend + Frontend (Spring Boot)
 
-## Описание
+## Description
 Backend-frontend application deploed to Kubernetes.
 - Backend — Spring Boot, answer to the requests, was replicated into 3 pods
 - Frontend — Spring Boot, proxies requests to backend, available outside the cluster
 
-## Требования
+## Requarements
 - Docker
 - Minikube
 - kubectl
 - Java 17, Maven
 
-## Запуск
+## Start
 
 1. strart minikube
 minikube start --driver=docker

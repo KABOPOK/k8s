@@ -1,9 +1,9 @@
 # Kubernetes: Backend + Frontend (Spring Boot)
 
 ## Описание
-Backend-frontend приложение задеплоенное в Kubernetes.
-- Backend — Spring Boot, отвечает на запросы, реплицирован в 3 пода
-- Frontend — Spring Boot, проксирует запросы на backend, доступен снаружи кластера
+Backend-frontend application deploed to Kubernetes.
+- Backend — Spring Boot, answer to the requests, was replicated into 3 pods
+- Frontend — Spring Boot, proxies requests to backend, available outside the cluster
 
 ## Требования
 - Docker
@@ -13,36 +13,36 @@ Backend-frontend приложение задеплоенное в Kubernetes.
 
 ## Запуск
 
-1. Запустить minikube
+1. strart minikube
 minikube start --driver=docker
 
-2. Переключиться на Docker внутри minikube
+2.Switch to Docker inside minikube
 eval $(minikube docker-env)
 
-3. Собрать образы
+3. Build images
 cd backend && mvn clean package -DskipTests && docker build -t backend:latest . && cd ..
 cd frontend && mvn clean package -DskipTests && docker build -t frontend:latest . && cd ..
 
-4. Задеплоить в Kubernetes
+4. Deploy to the Kubernetes
 kubectl apply -f backend/k8s/
 kubectl apply -f frontend/k8s/
 
-5. Проверить что всё запущено
+5. Check that everything have started
 kubectl get pods
 
-6. Открыть туннель (только для Mac)
+6.Open tunel (only for Mac)
 minikube service frontend-service --url
 
-## Тестирование
+## Testing
 
-Базовый запрос
+Base request
 curl http://127.0.0.1:PORT/ (покажет какой под отвечает)
 
-Проверка балансировки (healthy ручка)
+Check load balancing (healthy ручка)
 curl http://127.0.0.1:PORT/api/hello
 
-Нагрузить под (для проверки балансировка)
+Send heavy request to a pod (for the balancer checking)
 curl http://127.0.0.1:PORT/api/heavy
 
-Убить под (kubectl get pods -w - можно увидеть как кубернетис перезапускает сама поды)
+kill a pod (kubectl get pods -w - You can see how k8s recreate pods)
 curl http://127.0.0.1:PORT/api/kill

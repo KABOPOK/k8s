@@ -36,9 +36,9 @@ minikube service frontend-service --url
 ## Testing
 
 Base request
-curl http://127.0.0.1:PORT/ (покажет какой под отвечает)
+curl http://127.0.0.1:PORT/ (show which one pod have answered)
 
-Check load balancing (healthy ручка)
+Check load balancing (healthy hand)
 curl http://127.0.0.1:PORT/api/hello
 
 Send heavy request to a pod (for the balancer checking)
